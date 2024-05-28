@@ -18,17 +18,17 @@ module ram(
 );
     reg [31:0] data [127:0];
 
-    initial begin
-         data[0] = 32'h12345678;
-         data[1] = 32'h22222222;
-         data[2] = 32'h33333333;
-         data[3] = 32'h12345678;
-         data[4] = 32'hF2345678;
-         data[5] = 32'h12345678;
-         data[6] = 32'h12345678;
-         data[7] = 32'h12345678;
-         data[8] = 32'h12345678;
-    end
+    // initial begin
+    //      data[0] = 32'h12345678;
+    //      data[1] = 32'h22222222;
+    //      data[2] = 32'h33333333;
+    //      data[3] = 32'h12345678;
+    //      data[4] = 32'hF2345678;
+    //      data[5] = 32'h12345678;
+    //      data[6] = 32'h12345678;
+    //      data[7] = 32'h12345678;
+    //      data[8] = 32'h12345678;
+    // end
 
     assign ram_0 = data[0];
     assign ram_1 = data[1];

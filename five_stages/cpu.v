@@ -11,11 +11,13 @@
 `include "mux_3.v"
 `include "mux_2.v"
 `include "pc_operand.v"
+`include "pc_add_four.v"
 `include "if_id.v"
 `include "id_ex.v"
 `include "ex_me.v"
 `include "me_wb.v"
 `include "hazard_detection_unit.v"
+`include "forward_unit.v"
 
 module cpu(
     input clk, rst
@@ -137,7 +139,7 @@ next_pc NEXT_PC_INSTANCE(
     .branch_enable(me_branch_enable),
     .pc_condition(me_pc_condition),
 
-    .pc_add_4(if_pc_add_4),
+    .pc_add_four(if_pc_add_4),
     .pc_add_imm_32(me_pc_add_imm_32),
     .rs1_data_add_imm_32_for_pc(me_rs1_data_add_imm_32_for_pc),
 
@@ -147,9 +149,9 @@ next_pc NEXT_PC_INSTANCE(
 
 
 
-pc_add_4 PC_ADD_4_INSTANCE(
-    .pc(pc),
-    .pc_add_4(if_pc_add_4)
+pc_add_four PC_ADD_4_INSTANCE(
+    .pc(if_pc),
+    .pc_add_four(if_pc_add_4)
 );
 
 
@@ -217,17 +219,34 @@ controller CONTROLLER_INSTANCE(
     .pc_condition(id_pc_condition)
 );
 
-reg_file REG_FILE(
+regs REG_FILE(
     .rst(rst),
     .clk(clk),
     .write_reg_enable(wb_write_reg_enable),
-    .rs1(id_rs1_addr),
-    .rs2(id_rs2_addr),
+    .rs1_addr(id_rs1_addr),
+    .rs2_addr(id_rs2_addr),
     .rd_addr(id_rd_addr),
     .rd_write_data(wb_rd_write_data),
 
-    .read_rs1_data(id_rs1_data),
-    .read_rs2_data(id_rs2_data)
+    .rs1_data(id_rs1_data),
+    .rs2_data(id_rs2_data),
+
+    .reg_0(reg_0),
+    .reg_1(reg_1),
+    .reg_2(reg_2),
+    .reg_3(reg_3),
+    .reg_4(reg_4),
+    .reg_5(reg_5),
+    .reg_6(reg_6),
+    .reg_7(reg_7),
+    .reg_8(reg_8),
+    .reg_9(reg_9),
+    .reg_10(reg_10),
+    .reg_11(reg_11),
+    .reg_12(reg_12),
+    .reg_13(reg_13),
+    .reg_14(reg_14),
+    .reg_15(reg_15)
 );
 
 imm_gen IMM_INSTANCE(

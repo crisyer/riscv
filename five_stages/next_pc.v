@@ -3,7 +3,7 @@ module next_pc(
     input [31: 0] pc, 
     input [31:0] pc_add_imm_32, 
     input [31:0] rs1_data_add_imm_32_for_pc,
-    input [31:0] pc_add_4,
+    input [31:0] pc_add_four,
 
     input rst, clk,
     input [1: 0] pc_condition,
@@ -18,13 +18,13 @@ module next_pc(
       //normal
       3'b000 :
       begin
-        next_pc <= pc_add_4;
+        next_pc <= pc_add_four;
         flush <= 0;
       end
       //branch not staisfied. continue + 4
       3'b010 :
       begin
-        next_pc <= pc_add_4;
+        next_pc <= pc_add_four;
         flush <= 0;
       end
 
@@ -49,7 +49,7 @@ module next_pc(
       end
       default :
       begin
-        next_pc <= pc_add_4;
+        next_pc <= pc_add_four;
         flush <= 0;
       end
     endcase

@@ -22,7 +22,7 @@ module tb_cpu;
     end
 
     initial begin
-        $dumpfile("vcd/cpu_INSTANCE.vcd");
+        $dumpfile("vcd/cpu.vcd");
         $dumpvars(0, tb_cpu);
     end
     // 0000 0000 0001 0011 0000 0011 0001 0011
