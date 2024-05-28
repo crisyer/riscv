@@ -4,7 +4,7 @@ module ex_me(
     input  ex_write_reg_enable,
     input  ex_wb_aluOut_or_memOut,
     input  [1: 0] ex_write_ram_flag,
-    input  [2: 0] ex_read_ram_flag,
+    input  [2: 0] ex_load_ram_flag,
     input  [1: 0] ex_pc_condition, // alu
     input ex_branch_enable,
     input [31:0] ex_pc_add_imm_32,  //ex
@@ -17,7 +17,7 @@ module ex_me(
     output reg  me_write_reg_enable,
     output reg  me_wb_aluOut_or_memOut,
     output reg  [1: 0] me_write_ram_flag,
-    output reg  [2: 0] me_read_ram_flag,
+    output reg  [2: 0] me_load_ram_flag,
     output reg  [1: 0] me_pc_condition, // alu
     output reg me_branch_enable,
     output reg [31:0] me_alu_out,//new
@@ -35,7 +35,7 @@ module ex_me(
       me_write_reg_enable <= 0;
       me_wb_aluOut_or_memOut <= 0;
       me_write_ram_flag <= 0;
-      me_read_ram_flag <= 0;
+      me_load_ram_flag <= 0;
       me_pc_condition <= 0;
       me_branch_enable <= 0;
       me_alu_out <= 0;
@@ -50,7 +50,7 @@ module ex_me(
       me_write_reg_enable <= ex_write_ram_flag;
       me_wb_aluOut_or_memOut <= ex_wb_aluOut_or_memOut;
       me_write_ram_flag <= ex_write_ram_flag;
-      me_read_ram_flag <= ex_read_ram_flag;
+      me_load_ram_flag <= ex_load_ram_flag;
       me_pc_condition <= ex_pc_condition;
       me_branch_enable <= ex_branch_enable;
       me_alu_out <= ex_alu_out;

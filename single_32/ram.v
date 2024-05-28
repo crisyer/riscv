@@ -2,7 +2,7 @@ module ram(
     input [31:0] ram_addr,
     input [31:0] write_ram_data,
     input [1:0] write_ram_flag,
-    input [2: 0] read_ram_flag,
+    input [2: 0] load_ram_flag,
     input clk, rst,
     output reg [31:0] ram_out,
 
@@ -41,7 +41,7 @@ module ram(
     assign ram_8 = data[8];
 
 always @(*) begin
-    case (read_ram_flag[1:0])
+    case (load_ram_flag[1:0])
         2'b00:begin // 不读取
             ram_out = 32'b0;
         end
@@ -49,11 +49,11 @@ always @(*) begin
             ram_out = data[ram_addr];
         end
         2'b10:begin //读半字
-            if(read_ram_flag[2]) ram_out = {{16{data[ram_addr][31]}}, data[ram_addr][15:0]};
+            if(load_ram_flag[2]) ram_out = {{16{data[ram_addr][31]}}, data[ram_addr][15:0]};
             else ram_out = {16'b0, data[ram_addr][15:0]};
         end
         2'b11:begin // 读单字节
-            if(read_ram_flag[2]) ram_out = {{24{data[ram_addr][31]}}, data[ram_addr][6:0]};
+            if(load_ram_flag[2]) ram_out = {{24{data[ram_addr][31]}}, data[ram_addr][6:0]};
             else ram_out = {24'b0, data[ram_addr][7:0]};
         end 
         default:begin

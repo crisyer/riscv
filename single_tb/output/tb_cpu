@@ -49,7 +49,7 @@ v0x55d1a1eb1c70_0 .net "ram_7", 31 0, L_0x55d1a1ec6910;  1 drivers
 v0x55d1a1eb1d10_0 .net "ram_8", 31 0, L_0x55d1a1ec6a20;  1 drivers
 v0x55d1a1eb1db0_0 .net "ram_out", 31 0, v0x55d1a1eac990_0;  1 drivers
 v0x55d1a1eb1ea0_0 .net "rd_addr", 4 0, L_0x55d1a1eb3cc0;  1 drivers
-v0x55d1a1eb1fb0_0 .net "read_ram_flag", 2 0, v0x55d1a1ea6080_0;  1 drivers
+v0x55d1a1eb1fb0_0 .net "load_ram_flag", 2 0, v0x55d1a1ea6080_0;  1 drivers
 v0x55d1a1eb20c0_0 .net "reg_0", 31 0, L_0x55d1a1ec4b90;  1 drivers
 v0x55d1a1eb2180_0 .net "reg_1", 31 0, L_0x55d1a1ec4c00;  1 drivers
 v0x55d1a1eb2220_0 .net "reg_10", 31 0, L_0x55d1a1ec53e0;  1 drivers
@@ -98,7 +98,7 @@ S_0x55d1a1ea5790 .scope module, "CONTROLLER_INSTANCE" "controller" 4 117, 6 1 0,
     .port_info 6 /OUTPUT 1 "write_reg_enable";
     .port_info 7 /OUTPUT 2 "write_ram_flag";
     .port_info 8 /OUTPUT 1 "load_ram_enable";
-    .port_info 9 /OUTPUT 3 "read_ram_flag";
+    .port_info 9 /OUTPUT 3 "load_ram_flag";
     .port_info 10 /OUTPUT 2 "pc_condition";
 v0x55d1a1ea59b0_0 .var "alu_a_in", 0 0;
 v0x55d1a1ea5a90_0 .var "alu_b_in", 1 0;
@@ -108,7 +108,7 @@ v0x55d1a1ea5cd0_0 .net "func7", 6 0, L_0x55d1a1eb3e30;  alias, 1 drivers
 v0x55d1a1ea5e00_0 .var "load_ram_enable", 0 0;
 v0x55d1a1ea5ec0_0 .net "opcode", 6 0, L_0x55d1a1eb3a30;  alias, 1 drivers
 v0x55d1a1ea5fa0_0 .var "pc_condition", 1 0;
-v0x55d1a1ea6080_0 .var "read_ram_flag", 2 0;
+v0x55d1a1ea6080_0 .var "load_ram_flag", 2 0;
 v0x55d1a1ea6160_0 .var "write_ram_flag", 1 0;
 v0x55d1a1ea6240_0 .var "write_reg_enable", 0 0;
 E_0x55d1a1e37090 .event edge, v0x55d1a1ea5ec0_0, v0x55d1a1ea5c10_0, v0x55d1a1ea5cd0_0;
@@ -250,7 +250,7 @@ S_0x55d1a1eaa5e0 .scope module, "RAM_INSTANCE" "ram" 4 197, 13 1 0, S_0x55d1a1e7
     .port_info 0 /INPUT 32 "ram_addr";
     .port_info 1 /INPUT 32 "write_ram_data";
     .port_info 2 /INPUT 2 "write_ram_flag";
-    .port_info 3 /INPUT 3 "read_ram_flag";
+    .port_info 3 /INPUT 3 "load_ram_flag";
     .port_info 4 /INPUT 1 "clk";
     .port_info 5 /INPUT 1 "rst";
     .port_info 6 /OUTPUT 32 "ram_out";
@@ -294,7 +294,7 @@ v0x55d1a1eac710_0 .net "ram_7", 31 0, L_0x55d1a1ec6910;  alias, 1 drivers
 v0x55d1a1eac7f0_0 .net "ram_8", 31 0, L_0x55d1a1ec6a20;  alias, 1 drivers
 v0x55d1a1eac8d0_0 .net "ram_addr", 31 0, v0x55d1a1ea55c0_0;  alias, 1 drivers
 v0x55d1a1eac990_0 .var "ram_out", 31 0;
-v0x55d1a1eaca50_0 .net "read_ram_flag", 2 0, v0x55d1a1ea6080_0;  alias, 1 drivers
+v0x55d1a1eaca50_0 .net "load_ram_flag", 2 0, v0x55d1a1ea6080_0;  alias, 1 drivers
 v0x55d1a1eacaf0_0 .net "rst", 0 0, o0x7f898113af18;  alias, 0 drivers
 v0x55d1a1eacbe0_0 .net "write_ram_data", 31 0, L_0x55d1a1ec6180;  alias, 1 drivers
 v0x55d1a1eacc80_0 .net "write_ram_flag", 1 0, v0x55d1a1ea6160_0;  alias, 1 drivers

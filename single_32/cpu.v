@@ -41,7 +41,7 @@ wire  alu_a_in; // 二路选择器
 wire  [1:0] alu_b_in; // 三路选择器
 wire write_reg_enable; // 寄存器写信号
 wire [1: 0] write_ram_flag; // 写内存信号
-wire [2: 0] read_ram_flag; // 读内存信号
+wire [2: 0] load_ram_flag; // 读内存信号
 wire[1: 0] pc_condition;
 wire [31: 0] next_pc;
 wire branch_enable; // 条件跳转
@@ -125,7 +125,7 @@ controller CONTROLLER_INSTANCE(
     .alu_b_in(alu_b_in),
     .write_reg_enable(write_reg_enable),
     .write_ram_flag(write_ram_flag),
-    .read_ram_flag(read_ram_flag),
+    .load_ram_flag(load_ram_flag),
     .pc_condition(pc_condition)
 );
 
@@ -200,7 +200,7 @@ ram RAM_INSTANCE(
     .ram_addr(out_alu),
     .write_ram_data(rs2_data),
     .write_ram_flag(write_ram_flag),
-    .read_ram_flag(read_ram_flag),
+    .load_ram_flag(load_ram_flag),
 
     .ram_out(ram_out),
 

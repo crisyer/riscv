@@ -11,7 +11,7 @@ module controller(
 
     output reg [1: 0] write_ram_flag,  // s
     output reg load_ram_enable, // LW LH LB
-    output reg [2: 0] read_ram_flag,
+    output reg [2: 0] load_ram_flag,
     output reg [1: 0] pc_condition
 );
 
@@ -24,7 +24,7 @@ always @(*) begin
             alu_a_in = 0; // 
             alu_b_in = 2'b01; //imm
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             alu_opt = 5'b10001;
             pc_condition = 2'b00;
         end
@@ -35,7 +35,7 @@ always @(*) begin
             alu_a_in = 1; // pc
             alu_b_in = 2'b01; //imm
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             alu_opt = 5'b00000;
             pc_condition = 2'b00;
         end
@@ -46,7 +46,7 @@ always @(*) begin
             alu_a_in = 1; // pc
             alu_b_in = 2'b11; //  pc+4 ==>rd
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             alu_opt = 5'b00000;
             pc_condition = 2'b10;
         end
@@ -57,7 +57,7 @@ always @(*) begin
             alu_a_in = 0; // rs1_addr
             alu_b_in = 2'b01; //  rs + imm ==>rd
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             alu_opt = 5'b01010;
             pc_condition = 2'b11;
         end
@@ -68,7 +68,7 @@ always @(*) begin
             alu_a_in = 0; // rs1_addr
             alu_b_in = 2'b00;; //rs2_addr
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             pc_condition = 2'b01;
             case (func3)
                 // beq
@@ -107,29 +107,29 @@ always @(*) begin
             alu_a_in = 0; // rs1_addr
             alu_b_in = 2'b01; //imm
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             alu_opt = 5'b00000;
             pc_condition = 2'b00;
             case (func3)
                 // lw
                 3'b010:begin
-                    read_ram_flag = 3'b001;
+                    load_ram_flag = 3'b001;
                 end
                 // lh
                 3'b001:begin
-                    read_ram_flag = 3'b110;
+                    load_ram_flag = 3'b110;
                 end
                 // lb
                 3'b000:begin
-                    read_ram_flag = 3'b111;
+                    load_ram_flag = 3'b111;
                 end
                 // lbu
                 3'b100:begin
-                    read_ram_flag = 3'b011;
+                    load_ram_flag = 3'b011;
                 end
                 // lhu
                 3'b101:begin
-                    read_ram_flag = 3'b010;
+                    load_ram_flag = 3'b010;
                 end
                 default: begin
                     
@@ -143,7 +143,7 @@ always @(*) begin
             alu_a_in = 0; // rs1_addr
             alu_b_in = 2'b01; //imm
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             alu_opt = 5'b00000;
             pc_condition = 2'b00;
             case (func3)
@@ -171,7 +171,7 @@ always @(*) begin
             alu_a_in = 0; // rs1_addr
             alu_b_in = 2'b01; //imm
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             pc_condition = 2'b00;
 
             case (func3)
@@ -222,7 +222,7 @@ always @(*) begin
             alu_a_in = 0; // rs1_addr
             alu_b_in = 2'b00;; //rs2_addr
             write_ram_flag = 2'b00;
-            read_ram_flag = 3'b000;
+            load_ram_flag = 3'b000;
             pc_condition = 2'b00;
             case (func3)
                 // sub, add

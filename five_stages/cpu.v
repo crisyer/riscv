@@ -55,7 +55,7 @@ wire id_alu_a_in_rs1_or_pc; // 二路选择器
 wire[1: 0] id_alu_b_in_rs2Data_or_imm32_or_4; // 三路选择器
 wire id_write_reg_enable; // 寄存器写信号
 wire [1: 0] id_write_ram_flag; // 写内存信号
-wire [2: 0] id_read_ram_flag; // 读内存信号
+wire [2: 0] id_load_ram_flag; // 读内存信号
 wire [1: 0] id_pc_condition; // 无条件跳转
     // controller
 
@@ -68,7 +68,7 @@ wire[1: 0] ex_alu_b_in_rs2Data_or_imm32_or_4; // 三路选择器
 wire ex_write_reg_enable; // 寄存器写信号
     // controller
 wire [1: 0] ex_write_ram_flag; // 写内存信号
-wire [2: 0] ex_read_ram_flag; // 读内存信号
+wire [2: 0] ex_load_ram_flag; // 读内存信号
     // ram
 wire[1: 0] ex_pc_condition; // 无条件跳转
 wire [31: 0] ex_pc; 
@@ -85,7 +85,7 @@ wire ex_branch_enable; // 条件分支
 wire me_wb_aluOut_or_memOut; // 二路选择器
 wire me_write_reg_enable; // 寄存器写信号
 wire [1: 0] me_write_ram_flag; // 写内存信号
-wire [2: 0] me_read_ram_flag; // 读内存信号
+wire [2: 0] me_load_ram_flag; // 读内存信号
 wire[1: 0] me_pc_condition; // 无条件跳转
 wire me_branch_enable; // 条件分支
 wire [31: 0] me_pc_add_imm_32, me_rs1_data_add_imm_32_for_pc; // 分支
@@ -134,7 +134,7 @@ wire [31:0] ram_6;
 wire [31:0] ram_7;
 wire [31:0] ram_8;
 
-
+//if 阶段
 next_pc NEXT_PC_INSTANCE(
     .branch_enable(me_branch_enable),
     .pc_condition(me_pc_condition),
@@ -215,7 +215,7 @@ controller CONTROLLER_INSTANCE(
     .alu_b_in_rs2Data_or_imm32_or_4(id_alu_b_in_rs2Data_or_imm32_or_4),
     .write_reg_enable(id_write_reg_enable),
     .write_ram_flag(id_write_ram_flag),
-    .read_ram_flag(id_read_ram_flag),
+    .load_ram_flag(id_load_ram_flag),
     .pc_condition(id_pc_condition)
 );
 
@@ -256,7 +256,7 @@ imm_gen IMM_INSTANCE(
 );
 
 hazard_detection_unit HAZARD_DETECTION_UNIT(
-    .ex_read_ram_flag(ex_read_ram_flag),
+    .ex_load_ram_flag(ex_load_ram_flag),
     .ex_rd_addr(ex_rd_addr),
     .id_rs1_addr(id_rs1_addr),
     .id_rs2_addr(id_rs2_addr),
@@ -281,7 +281,7 @@ id_ex ID_EX_INSTANCE(
     .id_alu_b_in_rs2Data_or_imm32_or_4(id_alu_b_in_rs2Data_or_imm32_or_4),
     .id_write_reg_enable(id_write_reg_enable),
     .id_write_ram_flag(id_write_ram_flag),
-    .id_read_ram_flag(id_read_ram_flag),
+    .id_load_ram_flag(id_load_ram_flag),
     .id_pc_condition(id_pc_condition),
     .id_pc(id_pc),
     .id_rd_addr(id_rd_addr),
@@ -298,7 +298,7 @@ id_ex ID_EX_INSTANCE(
     .ex_alu_b_in_rs2Data_or_imm32_or_4(ex_alu_b_in_rs2Data_or_imm32_or_4),
     .ex_write_reg_enable(ex_write_reg_enable),
     .ex_write_ram_flag(ex_write_ram_flag),
-    .ex_read_ram_flag(ex_read_ram_flag),
+    .ex_load_ram_flag(ex_load_ram_flag),
     .ex_pc_condition(ex_pc_condition),
     .ex_pc(ex_pc),
     .ex_rd_addr(ex_rd_addr),
@@ -394,7 +394,7 @@ ex_me EX_ME(
     .ex_write_reg_enable(ex_write_reg_enable),
     .ex_wb_aluOut_or_memOut(ex_wb_aluOut_or_memOut),
     .ex_write_ram_flag(ex_write_ram_flag),
-    .ex_read_ram_flag(ex_read_ram_flag),
+    .ex_load_ram_flag(ex_load_ram_flag),
     .ex_pc_condition(ex_pc_condition),
     .ex_branch_enable(ex_branch_enable),
     .ex_pc_add_imm_32(ex_pc_add_imm_32),
@@ -407,7 +407,7 @@ ex_me EX_ME(
     .me_write_reg_enable(me_write_reg_enable),
     .me_wb_aluOut_or_memOut(me_wb_aluOut_or_memOut),
     .me_write_ram_flag(me_write_ram_flag),
-    .me_read_ram_flag(me_read_ram_flag),
+    .me_load_ram_flag(me_load_ram_flag),
     .me_pc_condition(me_pc_condition),
     .me_branch_enable(me_branch_enable),
     .me_pc_add_imm_32(me_pc_add_imm_32),
@@ -435,7 +435,7 @@ ram RAM_INSTANCE(
     .ram_addr(me_alu_out),
     .write_ram_data(me_true_rs2_data),
     .write_ram_flag(me_write_ram_flag),
-    .read_ram_flag(me_read_ram_flag),
+    .load_ram_flag(me_load_ram_flag),
 
     .ram_out(me_ram_out),
 

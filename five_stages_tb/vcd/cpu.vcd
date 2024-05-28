@@ -54,7 +54,7 @@ $var wire 2 H me_write_ram_flag [1:0] $end
 $var wire 1 I me_wb_aluOut_or_memOut $end
 $var wire 5 J me_rs2_addr [4:0] $end
 $var wire 32 K me_rs1_data_add_imm_32_for_pc [31:0] $end
-$var wire 3 L me_read_ram_flag [2:0] $end
+$var wire 3 L me_load_ram_flag [2:0] $end
 $var wire 5 M me_rd_addr [4:0] $end
 $var wire 32 N me_ram_out [31:0] $end
 $var wire 2 O me_pc_condition [1:0] $end
@@ -72,7 +72,7 @@ $var wire 32 Z id_rs2_data [31:0] $end
 $var wire 5 [ id_rs2_addr [4:0] $end
 $var wire 32 \ id_rs1_data [31:0] $end
 $var wire 5 ] id_rs1_addr [4:0] $end
-$var wire 3 ^ id_read_ram_flag [2:0] $end
+$var wire 3 ^ id_load_ram_flag [2:0] $end
 $var wire 5 _ id_rd_addr [4:0] $end
 $var wire 2 ` id_pc_condition [1:0] $end
 $var wire 32 a id_pc [31:0] $end
@@ -98,7 +98,7 @@ $var wire 5 t ex_rs2_addr [4:0] $end
 $var wire 32 u ex_rs1_data_add_imm_32_for_pc [31:0] $end
 $var wire 32 v ex_rs1_data [31:0] $end
 $var wire 5 w ex_rs1_addr [4:0] $end
-$var wire 3 x ex_read_ram_flag [2:0] $end
+$var wire 3 x ex_load_ram_flag [2:0] $end
 $var wire 5 y ex_rd_addr [4:0] $end
 $var wire 2 z ex_pc_condition [1:0] $end
 $var wire 32 { ex_pc_add_imm_32 [31:0] $end
@@ -126,7 +126,7 @@ $var reg 1 i alu_a_in_rs1_or_pc $end
 $var reg 2 ." alu_b_in_rs2Data_or_imm32_or_4 [1:0] $end
 $var reg 5 /" alu_opt [4:0] $end
 $var reg 2 0" pc_condition [1:0] $end
-$var reg 3 1" read_ram_flag [2:0] $end
+$var reg 3 1" load_ram_flag [2:0] $end
 $var reg 1 Y wb_aluOut_or_memOut $end
 $var reg 2 2" write_ram_flag [1:0] $end
 $var reg 1 W write_reg_enable $end
@@ -143,7 +143,7 @@ $var wire 1 p ex_wb_aluOut_or_memOut $end
 $var wire 32 5" ex_rs2_data [31:0] $end
 $var wire 5 6" ex_rs2_addr [4:0] $end
 $var wire 32 7" ex_rs1_data_add_imm_32_for_pc [31:0] $end
-$var wire 3 8" ex_read_ram_flag [2:0] $end
+$var wire 3 8" ex_load_ram_flag [2:0] $end
 $var wire 5 9" ex_rd_addr [4:0] $end
 $var wire 2 :" ex_pc_condition [1:0] $end
 $var wire 32 ;" ex_pc_add_imm_32 [31:0] $end
@@ -152,7 +152,7 @@ $var reg 1 Q me_branch_enable $end
 $var reg 32 =" me_pc_add_imm_32 [31:0] $end
 $var reg 2 >" me_pc_condition [1:0] $end
 $var reg 5 ?" me_rd_addr [4:0] $end
-$var reg 3 @" me_read_ram_flag [2:0] $end
+$var reg 3 @" me_load_ram_flag [2:0] $end
 $var reg 32 A" me_rs1_data_add_imm_32_for_pc [31:0] $end
 $var reg 5 B" me_rs2_addr [4:0] $end
 $var reg 32 C" me_rs2_data [31:0] $end
@@ -175,7 +175,7 @@ $upscope $end
 $scope module HAZARD_DETECTION_UNIT $end
 $var wire 5 L" id_rs2_addr [4:0] $end
 $var wire 5 M" id_rs1_addr [4:0] $end
-$var wire 3 N" ex_read_ram_flag [2:0] $end
+$var wire 3 N" ex_load_ram_flag [2:0] $end
 $var wire 5 O" ex_rd_addr [4:0] $end
 $var reg 1 F pause $end
 $upscope $end
@@ -185,7 +185,7 @@ $var wire 1 i id_alu_a_in_rs1_or_pc $end
 $var wire 2 P" id_alu_b_in_rs2Data_or_imm32_or_4 [1:0] $end
 $var wire 5 Q" id_alu_opt [4:0] $end
 $var wire 2 R" id_pc_condition [1:0] $end
-$var wire 3 S" id_read_ram_flag [2:0] $end
+$var wire 3 S" id_load_ram_flag [2:0] $end
 $var wire 1 Y id_wb_aluOut_or_memOut $end
 $var wire 2 T" id_write_ram_flag [1:0] $end
 $var wire 1 W id_write_reg_enable $end
@@ -206,7 +206,7 @@ $var reg 32 ^" ex_imm_32 [31:0] $end
 $var reg 32 _" ex_pc [31:0] $end
 $var reg 2 `" ex_pc_condition [1:0] $end
 $var reg 5 a" ex_rd_addr [4:0] $end
-$var reg 3 b" ex_read_ram_flag [2:0] $end
+$var reg 3 b" ex_load_ram_flag [2:0] $end
 $var reg 5 c" ex_rs1_addr [4:0] $end
 $var reg 32 d" ex_rs1_data [31:0] $end
 $var reg 5 e" ex_rs2_addr [4:0] $end
@@ -335,7 +335,7 @@ $var wire 32 N# ram_6 [31:0] $end
 $var wire 32 O# ram_7 [31:0] $end
 $var wire 32 P# ram_8 [31:0] $end
 $var wire 32 Q# ram_addr [31:0] $end
-$var wire 3 R# read_ram_flag [2:0] $end
+$var wire 3 R# load_ram_flag [2:0] $end
 $var wire 1 ! rst $end
 $var wire 32 S# write_ram_data [31:0] $end
 $var wire 2 T# write_ram_flag [1:0] $end

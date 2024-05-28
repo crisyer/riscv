@@ -33,7 +33,7 @@ v0x556c462c70a0_0 .net "ex_pc", 31 0, v0x556c462b4d70_0;  1 drivers
 v0x556c462c7160_0 .net "ex_pc_add_imm_32", 31 0, v0x556c462bf280_0;  1 drivers
 v0x556c462c7270_0 .net "ex_pc_condition", 1 0, v0x556c462b4e50_0;  1 drivers
 v0x556c462c7380_0 .net "ex_rd_addr", 4 0, v0x556c462b4f10_0;  1 drivers
-v0x556c462c7440_0 .net "ex_read_ram_flag", 2 0, v0x556c462b5000_0;  1 drivers
+v0x556c462c7440_0 .net "ex_load_ram_flag", 2 0, v0x556c462b5000_0;  1 drivers
 v0x556c462c7500_0 .net "ex_rs1_addr", 4 0, v0x556c462b5150_0;  1 drivers
 v0x556c462c7610_0 .net "ex_rs1_data", 31 0, v0x556c462b5210_0;  1 drivers
 v0x556c462c7720_0 .net "ex_rs1_data_add_imm_32_for_pc", 31 0, v0x556c462bf410_0;  1 drivers
@@ -59,7 +59,7 @@ v0x556c462c8ae0_0 .net "id_opcode", 6 0, L_0x556c462dcc00;  1 drivers
 v0x556c462c8bf0_0 .net "id_pc", 31 0, v0x556c462b7980_0;  1 drivers
 v0x556c462c8d00_0 .net "id_pc_condition", 1 0, v0x556c462b0f40_0;  1 drivers
 v0x556c462c8e10_0 .net "id_rd_addr", 4 0, L_0x556c462dcde0;  1 drivers
-v0x556c462c8ed0_0 .net "id_read_ram_flag", 2 0, v0x556c462b1020_0;  1 drivers
+v0x556c462c8ed0_0 .net "id_load_ram_flag", 2 0, v0x556c462b1020_0;  1 drivers
 v0x556c462c8fe0_0 .net "id_rs1_addr", 4 0, L_0x556c462dcca0;  1 drivers
 v0x556c462c9130_0 .net "id_rs1_data", 31 0, L_0x556c462de0d0;  1 drivers
 v0x556c462c91f0_0 .net "id_rs2_addr", 4 0, L_0x556c462dcd40;  1 drivers
@@ -77,7 +77,7 @@ v0x556c462c9cd0_0 .net "me_pc_add_imm_32", 31 0, v0x556c462b2380_0;  1 drivers
 v0x556c462c9de0_0 .net "me_pc_condition", 1 0, v0x556c462b2460_0;  1 drivers
 v0x556c462c9ef0_0 .net "me_ram_out", 31 0, v0x556c462c1990_0;  1 drivers
 v0x556c462ca000_0 .net "me_rd_addr", 4 0, v0x556c462b2540_0;  1 drivers
-v0x556c462ca0c0_0 .net "me_read_ram_flag", 2 0, v0x556c462b2620_0;  1 drivers
+v0x556c462ca0c0_0 .net "me_load_ram_flag", 2 0, v0x556c462b2620_0;  1 drivers
 v0x556c462ca1d0_0 .net "me_rs1_data_add_imm_32_for_pc", 31 0, v0x556c462b2700_0;  1 drivers
 v0x556c462ca2e0_0 .net "me_rs2_addr", 4 0, v0x556c462b27e0_0;  1 drivers
 o0x7f92002feda8 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
@@ -145,7 +145,7 @@ S_0x556c462b08f0 .scope module, "CONTROLLER_INSTANCE" "controller" 4 206, 6 1 0,
     .port_info 6 /OUTPUT 1 "write_reg_enable";
     .port_info 7 /OUTPUT 2 "write_ram_flag";
     .port_info 8 /OUTPUT 1 "wb_aluOut_or_memOut";
-    .port_info 9 /OUTPUT 3 "read_ram_flag";
+    .port_info 9 /OUTPUT 3 "load_ram_flag";
     .port_info 10 /OUTPUT 2 "pc_condition";
 v0x556c46267450_0 .var "alu_a_in_rs1_or_pc", 0 0;
 v0x556c46285ba0_0 .var "alu_b_in_rs2Data_or_imm32_or_4", 1 0;
@@ -154,7 +154,7 @@ v0x556c462b0c50_0 .net "func3", 2 0, L_0x556c462dce80;  alias, 1 drivers
 v0x556c462b0d30_0 .net "func7", 6 0, L_0x556c462dd030;  alias, 1 drivers
 v0x556c462b0e60_0 .net "opcode", 6 0, L_0x556c462dcc00;  alias, 1 drivers
 v0x556c462b0f40_0 .var "pc_condition", 1 0;
-v0x556c462b1020_0 .var "read_ram_flag", 2 0;
+v0x556c462b1020_0 .var "load_ram_flag", 2 0;
 v0x556c462b1100_0 .var "wb_aluOut_or_memOut", 0 0;
 v0x556c462b11c0_0 .var "write_ram_flag", 1 0;
 v0x556c462b12a0_0 .var "write_reg_enable", 0 0;
@@ -167,7 +167,7 @@ S_0x556c462b14c0 .scope module, "EX_ME" "ex_me" 4 389, 7 1 0, S_0x556c4627c0c0;
     .port_info 3 /INPUT 1 "ex_write_reg_enable";
     .port_info 4 /INPUT 1 "ex_wb_aluOut_or_memOut";
     .port_info 5 /INPUT 2 "ex_write_ram_flag";
-    .port_info 6 /INPUT 3 "ex_read_ram_flag";
+    .port_info 6 /INPUT 3 "ex_load_ram_flag";
     .port_info 7 /INPUT 2 "ex_pc_condition";
     .port_info 8 /INPUT 1 "ex_branch_enable";
     .port_info 9 /INPUT 32 "ex_pc_add_imm_32";
@@ -179,7 +179,7 @@ S_0x556c462b14c0 .scope module, "EX_ME" "ex_me" 4 389, 7 1 0, S_0x556c4627c0c0;
     .port_info 15 /OUTPUT 1 "me_write_reg_enable";
     .port_info 16 /OUTPUT 1 "me_wb_aluOut_or_memOut";
     .port_info 17 /OUTPUT 2 "me_write_ram_flag";
-    .port_info 18 /OUTPUT 3 "me_read_ram_flag";
+    .port_info 18 /OUTPUT 3 "me_load_ram_flag";
     .port_info 19 /OUTPUT 2 "me_pc_condition";
     .port_info 20 /OUTPUT 1 "me_branch_enable";
     .port_info 21 /OUTPUT 32 "me_alu_out";
@@ -194,7 +194,7 @@ v0x556c462b1810_0 .net "ex_branch_enable", 0 0, v0x556c462a2ab0_0;  alias, 1 dri
 v0x556c462b18b0_0 .net "ex_pc_add_imm_32", 31 0, v0x556c462bf280_0;  alias, 1 drivers
 v0x556c462b1950_0 .net "ex_pc_condition", 1 0, v0x556c462b4e50_0;  alias, 1 drivers
 v0x556c462b1a60_0 .net "ex_rd_addr", 4 0, v0x556c462b4f10_0;  alias, 1 drivers
-v0x556c462b1b40_0 .net "ex_read_ram_flag", 2 0, v0x556c462b5000_0;  alias, 1 drivers
+v0x556c462b1b40_0 .net "ex_load_ram_flag", 2 0, v0x556c462b5000_0;  alias, 1 drivers
 v0x556c462b1c20_0 .net "ex_rs1_data_add_imm_32_for_pc", 31 0, v0x556c462bf410_0;  alias, 1 drivers
 v0x556c462b1d00_0 .net "ex_rs2_addr", 4 0, v0x556c462b52d0_0;  alias, 1 drivers
 v0x556c462b1de0_0 .net "ex_rs2_data", 31 0, L_0x556c462def40;  alias, 1 drivers
@@ -207,7 +207,7 @@ v0x556c462b22c0_0 .var "me_branch_enable", 0 0;
 v0x556c462b2380_0 .var "me_pc_add_imm_32", 31 0;
 v0x556c462b2460_0 .var "me_pc_condition", 1 0;
 v0x556c462b2540_0 .var "me_rd_addr", 4 0;
-v0x556c462b2620_0 .var "me_read_ram_flag", 2 0;
+v0x556c462b2620_0 .var "me_load_ram_flag", 2 0;
 v0x556c462b2700_0 .var "me_rs1_data_add_imm_32_for_pc", 31 0;
 v0x556c462b27e0_0 .var "me_rs2_addr", 4 0;
 v0x556c462b28c0_0 .var "me_rs2_data", 31 0;
@@ -243,13 +243,13 @@ E_0x556c462a7d20/1 .event edge, v0x556c462b2b40_0, v0x556c462b2540_0, v0x556c462
 E_0x556c462a7d20 .event/or E_0x556c462a7d20/0, E_0x556c462a7d20/1;
 S_0x556c462b3c90 .scope module, "HAZARD_DETECTION_UNIT" "hazard_detection_unit" 4 258, 9 1 0, S_0x556c4627c0c0;
  .timescale -9 -10;
-    .port_info 0 /INPUT 3 "ex_read_ram_flag";
+    .port_info 0 /INPUT 3 "ex_load_ram_flag";
     .port_info 1 /INPUT 5 "ex_rd_addr";
     .port_info 2 /INPUT 5 "id_rs1_addr";
     .port_info 3 /INPUT 5 "id_rs2_addr";
     .port_info 4 /OUTPUT 1 "pause";
 v0x556c462b3ec0_0 .net "ex_rd_addr", 4 0, v0x556c462b4f10_0;  alias, 1 drivers
-v0x556c462b3fd0_0 .net "ex_read_ram_flag", 2 0, v0x556c462b5000_0;  alias, 1 drivers
+v0x556c462b3fd0_0 .net "ex_load_ram_flag", 2 0, v0x556c462b5000_0;  alias, 1 drivers
 v0x556c462b40a0_0 .net "id_rs1_addr", 4 0, L_0x556c462dcca0;  alias, 1 drivers
 v0x556c462b4170_0 .net "id_rs2_addr", 4 0, L_0x556c462dcd40;  alias, 1 drivers
 v0x556c462b4250_0 .var "pause", 0 0;
@@ -266,7 +266,7 @@ S_0x556c462b4400 .scope module, "ID_EX_INSTANCE" "id_ex" 4 272, 10 1 0, S_0x556c
     .port_info 7 /INPUT 2 "id_alu_b_in_rs2Data_or_imm32_or_4";
     .port_info 8 /INPUT 1 "id_write_reg_enable";
     .port_info 9 /INPUT 2 "id_write_ram_flag";
-    .port_info 10 /INPUT 3 "id_read_ram_flag";
+    .port_info 10 /INPUT 3 "id_load_ram_flag";
     .port_info 11 /INPUT 2 "id_pc_condition";
     .port_info 12 /INPUT 32 "id_pc";
     .port_info 13 /INPUT 5 "id_rd_addr";
@@ -281,7 +281,7 @@ S_0x556c462b4400 .scope module, "ID_EX_INSTANCE" "id_ex" 4 272, 10 1 0, S_0x556c
     .port_info 22 /OUTPUT 1 "ex_write_reg_enable";
     .port_info 23 /OUTPUT 2 "ex_write_ram_flag";
     .port_info 24 /OUTPUT 1 "ex_wb_aluOut_or_memOut";
-    .port_info 25 /OUTPUT 3 "ex_read_ram_flag";
+    .port_info 25 /OUTPUT 3 "ex_load_ram_flag";
     .port_info 26 /OUTPUT 2 "ex_pc_condition";
     .port_info 27 /OUTPUT 32 "ex_pc";
     .port_info 28 /OUTPUT 5 "ex_rd_addr";
@@ -298,7 +298,7 @@ v0x556c462b4c60_0 .var "ex_imm_32", 31 0;
 v0x556c462b4d70_0 .var "ex_pc", 31 0;
 v0x556c462b4e50_0 .var "ex_pc_condition", 1 0;
 v0x556c462b4f10_0 .var "ex_rd_addr", 4 0;
-v0x556c462b5000_0 .var "ex_read_ram_flag", 2 0;
+v0x556c462b5000_0 .var "ex_load_ram_flag", 2 0;
 v0x556c462b5150_0 .var "ex_rs1_addr", 4 0;
 v0x556c462b5210_0 .var "ex_rs1_data", 31 0;
 v0x556c462b52d0_0 .var "ex_rs2_addr", 4 0;
@@ -314,7 +314,7 @@ v0x556c462b5b20_0 .net "id_imm_32", 31 0, v0x556c462b8150_0;  alias, 1 drivers
 v0x556c462b5bc0_0 .net "id_pc", 31 0, v0x556c462b7980_0;  alias, 1 drivers
 v0x556c462b5c60_0 .net "id_pc_condition", 1 0, v0x556c462b0f40_0;  alias, 1 drivers
 v0x556c462b5d50_0 .net "id_rd_addr", 4 0, L_0x556c462dcde0;  alias, 1 drivers
-v0x556c462b5e10_0 .net "id_read_ram_flag", 2 0, v0x556c462b1020_0;  alias, 1 drivers
+v0x556c462b5e10_0 .net "id_load_ram_flag", 2 0, v0x556c462b1020_0;  alias, 1 drivers
 v0x556c462b5f00_0 .net "id_rs1_addr", 4 0, L_0x556c462dcca0;  alias, 1 drivers
 v0x556c462b5fd0_0 .net "id_rs1_data", 31 0, L_0x556c462de0d0;  alias, 1 drivers
 v0x556c462b6090_0 .net "id_rs2_addr", 4 0, L_0x556c462dcd40;  alias, 1 drivers
@@ -601,7 +601,7 @@ S_0x556c462bf5a0 .scope module, "RAM_INSTANCE" "ram" 4 431, 21 1 0, S_0x556c4627
     .port_info 0 /INPUT 32 "ram_addr";
     .port_info 1 /INPUT 32 "write_ram_data";
     .port_info 2 /INPUT 2 "write_ram_flag";
-    .port_info 3 /INPUT 3 "read_ram_flag";
+    .port_info 3 /INPUT 3 "load_ram_flag";
     .port_info 4 /INPUT 1 "clk";
     .port_info 5 /INPUT 1 "rst";
     .port_info 6 /OUTPUT 32 "ram_out";
@@ -645,7 +645,7 @@ v0x556c462c1680_0 .net "ram_7", 31 0, L_0x556c462e03c0;  alias, 1 drivers
 v0x556c462c1760_0 .net "ram_8", 31 0, L_0x556c462e04d0;  alias, 1 drivers
 v0x556c462c1840_0 .net "ram_addr", 31 0, v0x556c462b21e0_0;  alias, 1 drivers
 v0x556c462c1990_0 .var "ram_out", 31 0;
-v0x556c462c1a50_0 .net "read_ram_flag", 2 0, v0x556c462b2620_0;  alias, 1 drivers
+v0x556c462c1a50_0 .net "load_ram_flag", 2 0, v0x556c462b2620_0;  alias, 1 drivers
 v0x556c462c1af0_0 .net "rst", 0 0, o0x7f92002fca98;  alias, 0 drivers
 v0x556c462c1b90_0 .net8 "write_ram_data", 31 0, RS_0x7f92002fc9d8;  alias, 2 drivers
 v0x556c462c1c30_0 .net "write_ram_flag", 1 0, v0x556c462b2a60_0;  alias, 1 drivers

@@ -7,8 +7,8 @@ module id_ex(
     input  [1: 0] id_alu_b_in_rs2Data_or_imm32_or_4,
     input  id_write_reg_enable,
     input  [1: 0] id_write_ram_flag,
-    input  [2: 0] id_read_ram_flag,
-    input  [1: 0] id_pc_condition, // alu
+    input  [2: 0] id_load_ram_flag,
+    input  [1: 0] id_pc_condition, // controller
     input [31:0] id_pc,  // pc
     input [4: 0] id_rd_addr,
     input [4: 0] id_rs1_addr,
@@ -23,8 +23,8 @@ module id_ex(
     output reg ex_write_reg_enable,
     output reg [1: 0] ex_write_ram_flag,
     output reg ex_wb_aluOut_or_memOut,
-    output reg [2: 0] ex_read_ram_flag,
-    output reg [1: 0] ex_pc_condition, // alu
+    output reg [2: 0] ex_load_ram_flag,
+    output reg [1: 0] ex_pc_condition, // controller
     output reg [31:0] ex_pc, // pc
     output reg [4: 0] ex_rd_addr,
     output reg [4: 0] ex_rs1_addr,
@@ -44,7 +44,7 @@ module id_ex(
       ex_write_reg_enable <= 0;
       ex_write_ram_flag <= 0;
       ex_wb_aluOut_or_memOut <= 0;
-      ex_read_ram_flag <= 0;
+      ex_load_ram_flag <= 0;
       ex_pc_condition <= 0;
       ex_pc <= 0;
       ex_rd_addr <= 0;
@@ -62,7 +62,7 @@ module id_ex(
       ex_write_reg_enable <= id_write_reg_enable;
       ex_write_ram_flag <= id_write_ram_flag;
       ex_wb_aluOut_or_memOut <= id_wb_aluOut_or_memOut;
-      ex_read_ram_flag <= id_read_ram_flag;
+      ex_load_ram_flag <= id_load_ram_flag;
       ex_pc_condition <= id_pc_condition;
       ex_pc <= id_pc;
       ex_rd_addr <= id_rd_addr;

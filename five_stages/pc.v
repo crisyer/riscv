@@ -8,7 +8,8 @@ module pc(
 
 always @(posedge clk) begin
     if(rst) pc = 32'd0; 
-    // 这里是rom ram分离的,所以复位直接到第一条指令,或者说,rom的第一地址
+    // 这里是rom ram分离的,所以复位直接到第一条指令,
+    //或者说,rom的第一地址
     // 如果没有分数据和指令存储器,那么pc将复位到数据区域.
     else if (pause) begin
         // 空操作,阻止寄存器值的改变.

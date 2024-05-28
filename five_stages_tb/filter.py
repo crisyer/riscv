@@ -5,7 +5,7 @@ input_file = 'main.txt'
 # 输出文件路径
 output_file = 'commands.txt'
 
-# 使用正则表达式匹配 32 位 16 进制数字
+# 使用正则表达式匹配 32 位 16 进制数字,并且排除<func> 
 pattern = r'(?<!<)\b[0-9A-Fa-f]{8}\b(?!>)'
 
 # 读取输入文件并提取数字
