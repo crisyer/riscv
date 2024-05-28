@@ -4,13 +4,14 @@ module controller(
     input [6: 0] func7,
 
     output reg [4: 0] alu_opt,
-    output reg alu_a_in, // JAL JALR AUIPC
-    output reg [1: 0] alu_b_in,
+    
+    output reg alu_a_in_rs1_or_pc, // JAL JALR AUIPC
+    output reg [1: 0] alu_b_in_rs2Data_or_imm32_or_4,
 
     output reg write_reg_enable, // rd
 
     output reg [1: 0] write_ram_flag,  // s
-    output reg load_ram_enable, // LW LH LB
+    output reg wb_aluOut_or_memOut, // LW LH LB
     output reg [2: 0] read_ram_flag,
     output reg [1: 0] pc_condition
 );
@@ -20,9 +21,9 @@ always @(*) begin
         // lui
         7'b0110111:begin
             write_reg_enable = 1;
-            load_ram_enable = 0;
-            alu_a_in = 0; // 
-            alu_b_in = 2'b01; //imm
+            wb_aluOut_or_memOut = 0;
+            alu_a_in_rs1_or_pc = 0; // 
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b01; //imm
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             alu_opt = 5'b10001;
@@ -31,9 +32,9 @@ always @(*) begin
         // auipc
         7'b0010111:begin
             write_reg_enable = 1;
-            load_ram_enable = 0;
-            alu_a_in = 1; // pc
-            alu_b_in = 2'b01; //imm
+            wb_aluOut_or_memOut = 0;
+            alu_a_in_rs1_or_pc = 1; // pc
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b01; //imm
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             alu_opt = 5'b00000;
@@ -42,9 +43,9 @@ always @(*) begin
         // jal
         7'b1101111:begin
             write_reg_enable = 1;
-            load_ram_enable = 0;
-            alu_a_in = 1; // pc
-            alu_b_in = 2'b11; //  pc+4 ==>rd
+            wb_aluOut_or_memOut = 0;
+            alu_a_in_rs1_or_pc = 1; // pc
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b11; //  pc+4 ==>rd
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             alu_opt = 5'b00000;
@@ -53,9 +54,9 @@ always @(*) begin
         // jalr
         7'b1100111:begin
             write_reg_enable = 1;
-            load_ram_enable = 0;
-            alu_a_in = 0; // rs1_addr
-            alu_b_in = 2'b01; //  rs + imm ==>rd
+            wb_aluOut_or_memOut = 0;
+            alu_a_in_rs1_or_pc = 0; // rs1_addr
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b01; //  rs + imm ==>rd
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             alu_opt = 5'b01010;
@@ -64,9 +65,9 @@ always @(*) begin
         // B型指令
         7'b1100011:begin
             write_reg_enable = 0;
-            load_ram_enable = 0;
-            alu_a_in = 0; // rs1_addr
-            alu_b_in = 2'b00;; //rs2_addr
+            wb_aluOut_or_memOut = 0;
+            alu_a_in_rs1_or_pc = 0; // rs1_addr
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b00;; //rs2_addr
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             pc_condition = 2'b01;
@@ -103,9 +104,9 @@ always @(*) begin
         // L型指令
         7'b0000011:begin
             write_reg_enable = 1;
-            load_ram_enable = 1;
-            alu_a_in = 0; // rs1_addr
-            alu_b_in = 2'b01; //imm
+            wb_aluOut_or_memOut = 1;
+            alu_a_in_rs1_or_pc = 0; // rs1_addr
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b01; //imm
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             alu_opt = 5'b00000;
@@ -139,9 +140,9 @@ always @(*) begin
         // S型指令
         7'b0100011:begin
             write_reg_enable = 0;
-            load_ram_enable = 0;
-            alu_a_in = 0; // rs1_addr
-            alu_b_in = 2'b01; //imm
+            wb_aluOut_or_memOut = 0;
+            alu_a_in_rs1_or_pc = 0; // rs1_addr
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b01; //imm
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             alu_opt = 5'b00000;
@@ -167,9 +168,9 @@ always @(*) begin
         // I型指令
         7'b0010011:begin
             write_reg_enable = 1;
-            load_ram_enable = 0;
-            alu_a_in = 0; // rs1_addr
-            alu_b_in = 2'b01; //imm
+            wb_aluOut_or_memOut = 0;
+            alu_a_in_rs1_or_pc = 0; // rs1_addr
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b01; //imm
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             pc_condition = 2'b00;
@@ -218,9 +219,9 @@ always @(*) begin
         // R型指令
         7'b0110011:begin
             write_reg_enable = 1;
-            load_ram_enable = 0;
-            alu_a_in = 0; // rs1_addr
-            alu_b_in = 2'b00;; //rs2_addr
+            wb_aluOut_or_memOut = 0;
+            alu_a_in_rs1_or_pc = 0; // rs1_addr
+            alu_b_in_rs2Data_or_imm32_or_4 = 2'b00;; //rs2_addr
             write_ram_flag = 2'b00;
             read_ram_flag = 3'b000;
             pc_condition = 2'b00;

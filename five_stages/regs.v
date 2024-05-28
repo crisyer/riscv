@@ -1,8 +1,9 @@
 module regs(
     input  clk, rst,
-    input [4:0]  rs1_addr, rs2_addr, rd_addr,
-    input  [31:0] writ_data,
     input  write_reg_enable, 
+    
+    input [4:0]  rs1_addr, rs2_addr, rd_addr,
+    input  [31:0] rd_write_data,
 
     output [31:0] rs1_data, 
     output [31:0] rs2_data,
@@ -44,7 +45,7 @@ reg [31:0] regFile[31:0]; // 32个32位寄存器
 
 always @(posedge clk or posedge rst) begin
     if (write_reg_enable) begin
-        regFile[rd_addr] <= writ_data;
+        regFile[rd_addr] <= rd_write_data;
     end
 end
 
