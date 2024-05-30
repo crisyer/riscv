@@ -1,13 +1,16 @@
 module rom (
+    input  clk, 
     input[31:0] pc,
-    output[31:0] instr
+    // output reg [31:0] instr,
+    output reg [31:0] instr,
+    output reg ready
   );
 
 
-parameter num = 80'd29;
-reg [31:0] memoryData[0:num];
+// parameter num = 128; // 128条指令的容量
+reg [31:0] memoryData[0:127];
 
-  assign instr = memoryData[pc>>2];
+  // assign instr = memoryData[pc>>2]; // 现在对取指令行为加上delay
   // 可以这么理解, 假设我们的pc现在是 8 ,代表我们要去第8个地址(下图8)
   // >>2 之后,地址为2,代表第二条word
   // |  0  |  1 |  2 |  3 |
@@ -19,9 +22,27 @@ reg [31:0] memoryData[0:num];
 
   initial
   begin
-    // finish:
-    // memory[12] = 32'h00000013; // nop (add x0 x0 0)
      $readmemh("../five_stages_tb/commands.txt",memoryData);
+  end
+
+  reg [3:0] delay_counter = 0;
+
+  always @(posedge clk)
+  begin
+    if (delay_counter < 6) begin
+      delay_counter <= delay_counter + 1 ;
+      instr <= 32'd13;
+      ready <= 0;
+    end
+    else begin
+      delay_counter<=0;
+      ready <= 1;
+      instr <= memoryData[pc>>2];
+    end
+  end
+
+  initial begin
+    ready = 1;
   end
 
 endmodule

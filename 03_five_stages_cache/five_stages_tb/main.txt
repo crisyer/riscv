@@ -29,9 +29,19 @@ Disassembly of section .text:
   4c:	fec40793          	addi	a5,s0,-20
   50:	00078513          	mv	a0,a5
   54:	fadff0ef          	jal	ra,0 <fun>
-  58:	00000793          	li	a5,0
-  5c:	00078513          	mv	a0,a5
-  60:	01c12083          	lw	ra,28(sp)
-  64:	01812403          	lw	s0,24(sp)
-  68:	02010113          	addi	sp,sp,32
-  6c:	00008067          	ret
+  58:	fec42703          	lw	a4,-20(s0)
+  5c:	00b00793          	li	a5,11
+  60:	00f71a63          	bne	a4,a5,74 <main+0x40>
+  64:	fec42783          	lw	a5,-20(s0)
+  68:	00178793          	addi	a5,a5,1
+  6c:	fef42623          	sw	a5,-20(s0)
+  70:	0100006f          	j	80 <main+0x4c>
+  74:	fec42783          	lw	a5,-20(s0)
+  78:	fff78793          	addi	a5,a5,-1
+  7c:	fef42623          	sw	a5,-20(s0)
+  80:	00000793          	li	a5,0
+  84:	00078513          	mv	a0,a5
+  88:	01c12083          	lw	ra,28(sp)
+  8c:	01812403          	lw	s0,24(sp)
+  90:	02010113          	addi	sp,sp,32
+  94:	00008067          	ret

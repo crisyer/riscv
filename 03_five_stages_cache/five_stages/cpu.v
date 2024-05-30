@@ -134,6 +134,8 @@ wire [31:0] ram_6;
 wire [31:0] ram_7;
 wire [31:0] ram_8;
 
+wire pc_from_rom_ready;
+
 //if 阶段
 next_pc NEXT_PC_INSTANCE(
     .branch_enable(me_branch_enable),
@@ -150,7 +152,9 @@ next_pc NEXT_PC_INSTANCE(
 
 
 pc_add_four PC_ADD_4_INSTANCE(
+    .clk(clk),
     .pc(if_pc),
+    .pc_from_rom_ready(pc_from_rom_ready),
     .pc_add_four(if_pc_add_4)
 );
 
@@ -168,8 +172,11 @@ pc PC_INSTANCE(
 );
 
 rom ROM_INSTANCE(
-    .pc(if_pc),
-    .instr(if_instr)
+    .clk(clk),
+
+    .instr(if_instr),
+    .ready(pc_from_rom_ready),
+    .pc(if_pc)
 );
 
 // **************************** 

@@ -35,7 +35,7 @@ with open('../five_stages/rom.v', 'r') as file:
 # 从第 7 行开始处理
 for i in range(len(lines)):
     if i == 6 :
-                lines[i] = "parameter num = 80'd"+str(num_lines)+";\n"
+                lines[i] = "parameter num = "+str(num_lines)+";\n"
 
 # 将修改后的内容写回文件
 with open('../five_stages/rom.v', 'w') as file:

@@ -16,7 +16,7 @@ module tb_cpu;
 
     integer i;
     initial begin
-        for( i=0; i<128; i=i+1) begin
+        for( i=0; i<1280; i=i+1) begin
             clk=1; #20; clk=0; #20;
         end
     end
