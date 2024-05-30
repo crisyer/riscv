@@ -45,14 +45,14 @@ module id_ex(
       ex_write_ram_flag <= 0;
       ex_wb_aluOut_or_memOut <= 0;
       ex_load_ram_flag <= 0;
-      ex_pc_condition <= 0;
-      ex_pc <= 0;
+      ex_pc_condition <= 0; // alu_opt
+      ex_pc <= 0;   // pc
       ex_rd_addr <= 0;
       ex_rs1_addr <= 0;
       ex_rs2_addr <= 0;
-      ex_imm_32 <= 0;
+      ex_imm_32 <= 0;   // id
       ex_rs1_data <= 0;
-      ex_rs2_data <= 0;
+      ex_rs2_data <= 0;  // regs
     end
     else
     begin

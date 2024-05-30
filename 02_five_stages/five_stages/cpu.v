@@ -420,10 +420,11 @@ ex_me EX_ME(
 
 
 
-mux_2 MUX_WB_INSTANCE(
+mux_2 MUX_ME_INSTANCE(
     .signal(forwardC),
     .a(me_rs2_data),
     .b(wb_rd_write_data),
+    // 如果forwordC成立,也就是me使用到的rs2数据,来自于前一条(load)指令写回rd
 
     .out(me_true_rs2_data)
 );
